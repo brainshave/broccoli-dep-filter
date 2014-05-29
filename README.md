@@ -1,12 +1,14 @@
-# Dependency-tracking filtered processing for Broccoli
+# Dependency-tracking processing for Broccoli
 
-Similar to broccoli-filter but many-to-one instead of one-to-one.
+Similar to [broccoli-filter] [broccoli-filter] but many-to-one instead
+of one-to-one.
+
+[broccoli-filter]: https://github.com/broccolijs/broccoli-filter
 
 Rebuilds only if file or any of its dependencies changed. Doesn't need
 to parse any files in order to find dependencies.
 
 ## Usage (function style)
-
 
     var filter = require("broccoli-dep-filter");
 
