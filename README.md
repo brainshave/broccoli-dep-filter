@@ -26,7 +26,7 @@ to parse any files in order to find dependencies.
 
 Planned to work as a drop-in replacement for broccoli-filter.
 
-## How the dependency-tracking work?
+## How does the dependency-tracking work?
 
 Files that are read during a build of a target (an output file) are
 observed (with the [fs-history] [fs-history] module) and
