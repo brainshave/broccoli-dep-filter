@@ -1,14 +1,26 @@
 {
   "name": "broccoli-dep-filter",
   "version": "0.1.0",
+  "description": "Broccoli filtered processing with dependency tracking",
   "main": "lib/index.js",
+  "author": "Szymon Witamborski <szywon@szywon.pl>",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/szywon/broccoli-dep-filter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/szywon/broccoli-dep-filter/issues"
+  },
   "dependencies": {
     "q": "^1.0.0",
     "underscore": "^1.6.0",
-    "fs-history": "^0.1",
-    "walk-sync": "0.1",
-    "quick-temp": "0.1",
-    "mkdirp": "0.3",
-    "promise-map-series": "0.2"
+    "fs-history": "^0.1.0",
+    "walk-sync": "^0.1.0",
+    "quick-temp": "^0.1.0",
+    "mkdirp": "^0.3.0",
+    "promise-map-series": "^0.2.0"
   }
 }
