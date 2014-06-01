@@ -12,34 +12,47 @@ to parse any files in order to find dependencies.
 
     var filter = require("broccoli-dep-filter");
 
-    var tree = filter(input_tree, options);
+    var tree = filter(config);
 
-Options:
+## Configuration
 
-- extensions: list of extensions for input files
-- target: extension of produced output files
-- process: function that processes a source file
-- init: (optional) invoke when all trees are ready, array of tree paths is passed in, has to return process function,  `process` field is ignored if `init` is present
-- extra: (optional) list of extra trees to require before processing
+Input trees options:
+
+- `trees`: array or object, one or more indexed or named trees,
+- `iterated`: iterated trees, indexes or names from the `trees` option, optional, defaults to all indexes or keys from `trees`
+
+Filtering options:
+
+- `extensions`: list of extensions of input files
+- `target`: extension of produced output files
+
+Processing options:
+
+- `process(src : String) : String`
+- `init(trees : Array || Object) : process`
+
+You pass only one of `init` or `process`.
 
 The `process` function is invoked for every input file, as argument it
 gets file contents. `process` can return either a string or a promise
 that resolves to a string.
 
+The `init`
+
 Example:
 
     var filter = require("broccoli-dep-filter");
 
-      module.exports = function (options) {
-
-      return filter(input_tree, {
+    function setup (input_tree, less_config) {
+      return filter({
+        trees: [input_tree],
         extensions: ["less"],
         target: "css",
-        process: compile
+        process: compile_less
       });
 
-      function compile_less (str) {
-        // …
+      function compile_less (src) {
+        //…
       }
     }
 
