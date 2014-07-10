@@ -1,12 +1,11 @@
-# Dependency-tracking processing for Broccoli
+# Dependency-tracking multiple-tree processing for Broccoli
 
-Similar to [broccoli-filter] [broccoli-filter] but many-to-one instead
-of one-to-one.
+- Tracks dependencies of each file automatically, even files included during compilation (using [fs-history])
+- Takes in multiple trees, allows to name them (you can pass an object instead of an array), only chosen ones are iterated over
+- Bit like [broccoli-filter] but more
 
+[fs-history]: https://www.npmjs.org/package/fs-history
 [broccoli-filter]: https://github.com/broccolijs/broccoli-filter
-
-Rebuilds only if file or any of its dependencies changed. Doesn't need
-to parse any files in order to find dependencies.
 
 ## Usage (function style)
 
@@ -19,12 +18,20 @@ to parse any files in order to find dependencies.
 Input trees options:
 
 - `trees`: array or object, one or more indexed or named trees,
-- `iterated`: iterated trees, indexes or names from the `trees` option, optional, defaults to all indexes or keys from `trees`
+- `iterated`: iterated trees, indexes or names from the `trees` option (optional, defaults to all indexes or keys from `trees`)
 
 Filtering options:
 
-- `extensions`: list of extensions of input files
-- `target`: extension of produced output files
+- `extensions`: list of extensions of input files (optional)
+- `target`: extension of produced output files (optional, only applies to `extensions`)
+- `filter`: either a function or a regular expression (optional)
+
+Various options:
+
+- `dest_dir`: move output files to a subdirectory of the output tree
+- `read`: by default `process` receives file contents, set `read` to false if you want just the file path
+- `binary`: read and save file as binary buffer instead of a UTF-8 string
+- `name`: label the tree (used for reporting performance metrics by broccoli)
 
 Processing options:
 
@@ -34,10 +41,14 @@ Processing options:
 You pass only one of `init` or `process`.
 
 The `process` function is invoked for every input file, as argument it
-gets file contents. `process` can return either a string or a promise
-that resolves to a string.
+gets file contents (if `read: false`) as a string or a buffer (when
+`binary: true`). `process` can returns file's out content either
+directly or as a promise (it has to be the same type as input).
 
-The `init`
+The `init` function is invoked once all input trees are resolved. As
+an argument it gets an array or object (depending on the type of the
+`trees` option) mapping the tree names or indexes to trees' root
+directories. `init` returns a function that's processes every file.
 
 Example:
 
