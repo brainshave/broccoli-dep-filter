@@ -24,7 +24,7 @@ Filtering options:
 
 - `extensions`: list of extensions of input files (optional)
 - `target`: extension of produced output files (optional, only applies to `extensions`)
-- `filter`: either a function or a regular expression (optional)
+- `filter`: extra filtering, either a function or a regular expression (optional)
 
 Various options:
 
@@ -42,13 +42,14 @@ You pass only one of `init` or `process`.
 
 The `process` function is invoked for every input file, as argument it
 gets file contents (if `read: false`) as a string or a buffer (when
-`binary: true`). `process` can returns file's out content either
-directly or as a promise (it has to be the same type as input).
+`binary: true`). `process` can return file's content either directly
+or as a promise (it has to be the same type as input: buffer or
+string).
 
 The `init` function is invoked once all input trees are resolved. As
 an argument it gets an array or object (depending on the type of the
 `trees` option) mapping the tree names or indexes to trees' root
-directories. `init` returns a function that's processes every file.
+directories. `init` has to return a `process` function.
 
 Example:
 
