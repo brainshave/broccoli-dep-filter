@@ -1,9 +1,10 @@
 {
   "name": "broccoli-dep-filter",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Broccoli filtered processing with dependency tracking",
   "main": "lib/index.js",
-  "author": "Szymon Witamborski <szywon@szywon.pl>",
+  "author": "Szymon Witamborski <simon@brainshave.com>",
+  "license": "MIT",
   "engines": {
     "node": ">= 0.8.0"
   },

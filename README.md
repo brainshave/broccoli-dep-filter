@@ -83,4 +83,4 @@ have changed.
 
 ## Copying
 
-MIT licence.
+MIT licence, see [COPYING](COPYING).
